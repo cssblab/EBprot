@@ -1,0 +1,9 @@
+C:\Users\mzhangyb\source\repos\PluginEBProt\PluginEBProt\obj\Debug\PluginEBProt.csprojResolveAssemblyReference.cache
+C:\Users\mzhangyb\source\repos\PluginEBProt\PluginEBProt\obj\Debug\PluginEBProt.csproj.CoreCompileInputs.cache
+C:\Users\mzhangyb\source\repos\PluginEBProt\PluginEBProt\bin\Debug\PluginEBprot.dll
+C:\Users\mzhangyb\source\repos\PluginEBProt\PluginEBProt\bin\Debug\PluginEBprot.pdb
+C:\Users\mzhangyb\source\repos\PluginEBProt\PluginEBProt\bin\Debug\BaseLibS.dll
+C:\Users\mzhangyb\source\repos\PluginEBProt\PluginEBProt\bin\Debug\PerseusApi.dll
+C:\Users\mzhangyb\source\repos\PluginEBProt\PluginEBProt\bin\Debug\PerseusApi.xml
+C:\Users\mzhangyb\source\repos\PluginEBProt\PluginEBProt\obj\Debug\PluginEBprot.dll
+C:\Users\mzhangyb\source\repos\PluginEBProt\PluginEBProt\obj\Debug\PluginEBprot.pdb
