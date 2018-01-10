@@ -28,7 +28,7 @@ Currently, the plugin is only distributed through github.
 
 To install through github:
 
-* [Download Perseus-PluginEBprot ZIP](https://github.com/PECAplus/Perseus-PluginPECA/releases/download/v1.0.0/pluginpeca_1.0.0.zip)
+* [Download Perseus-PluginEBprot ZIP](../../releases/download/v0.0.1/pluginEBprot_0.0.1.zip)
 * Unzip `pluginEBport_<version>.zip`
 * Locate the directory of `Perseus.exe`, which contains `bin` folder
 * Copy/Cut `PluginEBprot.dll` file and `EBprotInstallations` folder from `pluginEBprot_<version>.zip\Plugin`
@@ -36,4 +36,4 @@ To install through github:
 
 ## Bugs and Feedback
 
-For bugs, questions and discussions please use the [GitHub Issues](https://github.com/PECAplus/Perseus-PluginPECA/issues).
+For bugs, questions and discussions please use the [GitHub Issues](../../issues).
