@@ -41,4 +41,25 @@
 		Group 3 Contrast: Group 3/Group 1 
 
 Note that choosing `Group 1 Contrast: Group 3/Group 1` and `Group 3 Contrast: None` gives the same result since the same contrast is made.
+
+## EBprotV2 Parameters
+	Working Directory: <preferred directory where results should be saved>
+	Experimental Design: Independent
+	Data Input Form: log_2
+	[x] Outlier Filtering:
+		Min K: 5
+		Bayesian False Discovery Rate Cutoff: 0.05
+	Lower Bound: 0.20
+	Upper Bound: 0.80
+	Min # of Peptides: 1
+	Peptide Identifier Column: Sequence
+	Protein Indentifier Column: Proteins
+	# of Labels: 2
+		Label 1 Name: TNvsERPR
+		Label 1 Data: 
+			TN/ERPR
+		Label 2 Name: TNvsHER2
+		Label 2 Data:
+			TN/HER2
+
 		
