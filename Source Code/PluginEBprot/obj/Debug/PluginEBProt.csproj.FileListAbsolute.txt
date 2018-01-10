@@ -7,3 +7,12 @@ C:\Users\mzhangyb\source\repos\PluginEBProt\PluginEBProt\bin\Debug\PerseusApi.dl
 C:\Users\mzhangyb\source\repos\PluginEBProt\PluginEBProt\bin\Debug\PerseusApi.xml
 C:\Users\mzhangyb\source\repos\PluginEBProt\PluginEBProt\obj\Debug\PluginEBprot.dll
 C:\Users\mzhangyb\source\repos\PluginEBProt\PluginEBProt\obj\Debug\PluginEBprot.pdb
+C:\Users\mzhangyb\Desktop\Perseus-PluginEBprot\Source Code\PluginEBProt\bin\Debug\PluginEBprot.dll
+C:\Users\mzhangyb\Desktop\Perseus-PluginEBprot\Source Code\PluginEBProt\bin\Debug\PluginEBprot.pdb
+C:\Users\mzhangyb\Desktop\Perseus-PluginEBprot\Source Code\PluginEBProt\bin\Debug\BaseLibS.dll
+C:\Users\mzhangyb\Desktop\Perseus-PluginEBprot\Source Code\PluginEBProt\bin\Debug\PerseusApi.dll
+C:\Users\mzhangyb\Desktop\Perseus-PluginEBprot\Source Code\PluginEBProt\bin\Debug\PerseusApi.xml
+C:\Users\mzhangyb\Desktop\Perseus-PluginEBprot\Source Code\PluginEBProt\obj\Debug\PluginEBprot.csprojResolveAssemblyReference.cache
+C:\Users\mzhangyb\Desktop\Perseus-PluginEBprot\Source Code\PluginEBProt\obj\Debug\PluginEBprot.csproj.CoreCompileInputs.cache
+C:\Users\mzhangyb\Desktop\Perseus-PluginEBprot\Source Code\PluginEBProt\obj\Debug\PluginEBprot.dll
+C:\Users\mzhangyb\Desktop\Perseus-PluginEBprot\Source Code\PluginEBProt\obj\Debug\PluginEBprot.pdb
