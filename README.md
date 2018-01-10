@@ -10,6 +10,8 @@ The principal method (version 1) was published [here](http://onlinelibrary.wiley
 
 See the [Wiki](../../wiki) for full documentation.
 
+See [Samples](Samples) for sample files and parameters.
+
 A step by step tutorial is available [here](../../wiki/Getting-Started).
 
 ## Requirements
