@@ -12,7 +12,7 @@ The principal method (version 1) was published [here](http://onlinelibrary.wiley
 
 See the [Wiki](../../wiki) for full documentation.
 
-A step by step tutorial is available [here]().
+A step by step tutorial is available [here](../../wiki/Getting-Started).
 
 ## Requirements
 
@@ -31,7 +31,7 @@ To install through github:
 * [Download Perseus-PluginEBprot ZIP](../../releases/download/v0.0.1/pluginEBprot_0.0.1.zip)
 * Unzip `pluginEBport_<version>.zip`
 * Locate the directory of `Perseus.exe`, which contains `bin` folder
-* Copy/Cut `PluginEBprot.dll` file and `EBprotInstallations` folder from `pluginEBprot_<version>.zip\Plugin`
+* Copy/Cut `PluginEBprot.dll` file and `EBprotInstallations` folder from `pluginEBprot_<version>`
 * Paste into the `bin` folder
 
 ## Bugs and Feedback
