@@ -32,7 +32,7 @@ namespace PluginEBprot
         //insert github plugin in the future
         public virtual string Url => "https://www.ncbi.nlm.nih.gov/pubmed/25913743";
 
-        public virtual string Heading => "EBProt";
+        public virtual string Heading => "EBprot";
 
         public virtual string HelpOutput { get; }
 

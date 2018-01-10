@@ -10,6 +10,8 @@ namespace PluginEBprot
     {
         public const int GRPTASK = 0;
         public const int EBPROTTASK = 1;
+        //anything that is not equal to EB,GRP TASK
+        public const int PLOTTASK = 2;
         public static int RunExe(string exe, string arg, string workingDir, Action<string> status, Action<int> progress, int task, out string errorString)
         {
             errorString = null;
@@ -62,7 +64,7 @@ namespace PluginEBprot
 
         public static int RunEBprot(string workingDir, Action<string> status, Action<int> progress, out string errorString)
         {
-            string exe = System.IO.Path.Combine(Directory.GetCurrentDirectory(), @".\bin\EBprotInstallations\EBprotV2.exe");
+            string exe = Path.Combine(Directory.GetCurrentDirectory(), @".\bin\EBprotInstallations\EBprotV2.exe");
             string args = "\"" + System.IO.Path.Combine(@workingDir, Utils.EBPROTINPUTDATAFILE) + "\"" + " \"" + System.IO.Path.Combine(@workingDir, Utils.EBPROTINPUTPARAMFILE) + "\"";
             //string args = "\"" + System.IO.Path.Combine(@workingDir, @".\weighted_grpcomparisons.txt") + "\"" + " \"" + System.IO.Path.Combine(@workingDir, @".\input_EBprotV2") + "\"";
             return RunExe(exe, args, workingDir, status, progress, EBPROTTASK, out errorString);
@@ -70,9 +72,15 @@ namespace PluginEBprot
         }
         public static int RunGRP(string workingDir, Action<string> status, Action<int> progress, out string errorString)
         {
-            string exe = System.IO.Path.Combine(Directory.GetCurrentDirectory(), @".\bin\EBprotInstallations\EBprot.MakeGrpData.exe");
+            string exe = Path.Combine(Directory.GetCurrentDirectory(), @".\bin\EBprotInstallations\EBprot.MakeGrpData.exe");
             string args = "\"" + System.IO.Path.Combine(@workingDir, Utils.GRPINPUTDATAFILE) + "\"" + " \"" + System.IO.Path.Combine(@workingDir, Utils.GRPINPUTPARAMFILE) + "\"";
             return RunExe(exe, args, workingDir, status, progress, GRPTASK, out errorString);
+        }
+        public static int RunPlot(string workingDir, Action<string> status, Action<int> progress, out string errorString)
+        {
+            string exe = Path.Combine(Directory.GetCurrentDirectory(), @".\bin\EBprotInstallations\EBprotV2_PLOT.exe");
+            string args = null;
+            return RunExe(exe,args,workingDir, status, progress, GRPTASK, out errorString);
         }
     }
 }

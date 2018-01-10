@@ -71,6 +71,12 @@ namespace PluginEBprot.EBConversion
 
             Utils.LoadOutput(mdata, workingDirectory);
 
+            if (ExternalProcess.RunPlot(workingDirectory, processInfo.Status, processInfo.Progress, out string processInfoErrStringP) != 0)
+            {
+                processInfo.ErrString = processInfoErrStringP;
+                return;
+            }
+
             processInfo.Progress(0);
         }
     }
