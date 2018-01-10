@@ -26,7 +26,7 @@ namespace PluginEBprot
         public const string BFDRCUT = "Bayesian False Discovery Rate Cutoff";
         public const string LEFTB = "Lower Bound";
         public const string RIGHTB = "Upper Bound";
-        public const string CONTRAST = "Comparison";
+        public const string CONTRAST = "Contrast";
         public const string MINSAMP = "Min # of Samples";
         public static FolderParam GetWorkingDir()
         {
