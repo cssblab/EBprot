@@ -28,7 +28,7 @@ Currently, the plugin is only distributed through github.
 
 To install through github:
 
-* [Download Perseus-PluginEBprot ZIP](../../releases/download/v0.0.1/pluginEBprot_0.0.1.zip)
+* [Download Perseus-PluginEBprot ZIP](../../releases/latest/pluginEBprot.zip)
 * Unzip `pluginEBprot_<version>.zip`
 * Locate the directory of `Perseus.exe`, which contains `bin` folder
 * Copy/Cut `PluginEBprot.dll` file and `EBprotInstallations` folder from `pluginEBprot_<version>`
