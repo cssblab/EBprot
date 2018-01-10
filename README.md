@@ -2,7 +2,7 @@
 
 Perseus Plugin for EBprot
 
-**** (**EBprot**) is a statistical tool for differential expression of proteins in labeling-based proteomics experiments. The tool directly models the distribution of peptide-level ratios and scores each protein based on consistent evidence across the peptides, in contrast to the common practice of assigning p-values to protein-level ratios which loses reproducibility information.
+**EBprot** is a statistical tool for differential expression of proteins in labeling-based proteomics experiments. The tool directly models the distribution of peptide-level ratios and scores each protein based on consistent evidence across the peptides, in contrast to the common practice of assigning p-values to protein-level ratios which loses reproducibility information.
 
 The modules presented here contain an improved extension of EBprot (version 1) offering flexible semi-parametric modeling which is more robust in handling heavily skewed or multi-modal data, like ratio data. 
 
@@ -10,7 +10,7 @@ The principal method (version 1) was published [here](http://onlinelibrary.wiley
 
 ## Full Documentation
 
-See the [Wiki](wiki) for full documentation.
+See the [Wiki](../../wiki) for full documentation.
 
 A step by step tutorial is available [here]().
 
