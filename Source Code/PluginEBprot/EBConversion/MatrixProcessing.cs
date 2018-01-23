@@ -16,14 +16,13 @@ namespace PluginEBprot.EBConversion
     class MatrixProcessing : PluginEBprot.MatrixProcessing, IMatrixProcessing
     {
         //fill
-        public override string Name => "EBprotWithRatioConversion";
+        public override string Name => "EBprotV2.GrpComparisons";
 
         //fill
         public override string Description => "";
         
         public override float DisplayRank => 1;
 
-        //fill
         public override Bitmap2 DisplayImage => Utils.GetImage("EBlogo.png");
 
         public override Parameters GetParameters(IMatrixData mdata, ref string errString)
@@ -34,6 +33,7 @@ namespace PluginEBprot.EBConversion
                     EBParameters.GetWorkingDir()
                 );
             parameters.AddParameterGroup(EBParameters.GetAboutEBData(), "About Data", false);
+            parameters.AddParameterGroup(EBParameters.GetResults(), "Reporting Results", false);
             parameters.AddParameterGroup(EBParameters.GetFiltering(), "Filtering", false);
             parameters.AddParameterGroup(EBParameters.GetNullDistr(), "Null Distribution Estimate", false);
             parameters.AddParameterGroup(EBParameters.SelectConvData(mdata), "Select Data", false);
@@ -69,7 +69,7 @@ namespace PluginEBprot.EBConversion
                 return;
             }
 
-            Utils.LoadOutput(mdata, workingDirectory);
+            Utils.LoadOutput(mdata, param, workingDirectory);
 
             if (ExternalProcess.RunPlot(workingDirectory, processInfo.Status, processInfo.Progress, out string processInfoErrStringP) != 0)
             {

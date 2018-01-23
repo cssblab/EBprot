@@ -35,7 +35,9 @@ namespace PluginEBprot
             var errorData = new List<string>();
             process.ErrorDataReceived += (sender, error) =>
             {
-                //Debug.WriteLine(error.Data);
+                //EBprot programs are outputing to cerr
+                //so need status here
+                status(error.Data);
                 errorData.Add(error.Data);
             };
             process.Start();

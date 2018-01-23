@@ -33,6 +33,7 @@ namespace PluginEBprot.EBprot
                     EBParameters.GetWorkingDir()
                 );
             parameters.AddParameterGroup(EBParameters.GetAboutEBData(), "About Data", false);
+            parameters.AddParameterGroup(EBParameters.GetResults(), "Reporting Results", false);
             parameters.AddParameterGroup(EBParameters.GetFiltering(), "Filtering", false);
             parameters.AddParameterGroup(EBParameters.GetNullDistr(), "Null Distribution Estimate", false);
             parameters.AddParameterGroup(EBParameters.SelectEBData(mdata), "Select Data", false);
@@ -62,7 +63,7 @@ namespace PluginEBprot.EBprot
                 return;
             }
 
-            Utils.LoadOutput(mdata, workingDirectory);
+            Utils.LoadOutput(mdata, param, workingDirectory);
 
             if (ExternalProcess.RunPlot(workingDirectory, processInfo.Status, processInfo.Progress, out string processInfoErrStringP) != 0)
             {

@@ -16,11 +16,16 @@ namespace PluginEBprot
         public const string DIR = "Working Directory";
         public const string PEPID = "Peptide Identifier Column";
         public const string PROTID = "Protein Identifier Column";
-        public const string LABELNUM = "# of Labels";
+        public const string LABELNUM = "# of Comparisons";
         public const string GROUPNUM = "# of Groups";
         public const string MINPEP = "Min # of Peptides";
         public const string DATAFORM = "Data Input Form";
         public const string EXPDESIGN = "Experimental Design";
+        public const string MEDRATIO = "Median Ratio of Proteins";
+        public const string NUMPEP = "# of Peptides in Proteins";
+        public const string PEPREM = "# of Peptides Removed";
+        public const string PPSCORE = "PP Score";
+        public const string POSTODD = "Posterior Odds";
         public const string OUTFILT = "Outlier Filtering";
         public const string MINK = "Min K";
         public const string BFDRCUT = "Bayesian False Discovery Rate Cutoff";
@@ -105,7 +110,7 @@ namespace PluginEBprot
 
         public static string LabelString(int i, string str)
         {
-            return "Label " + i.ToString() + " " + str;
+            return "Comparison " + i.ToString() + " " + str;
         }
 
         public static SingleChoiceWithSubParams GetLabels(IMatrixData mdata)
@@ -119,13 +124,13 @@ namespace PluginEBprot
             for (int i = 0; i < 10; i++)
             {
                 choiceList[i] = (i + 1).ToString();
-                Parameter[] subsubParam = new Parameter[2*(i + 1)];
+                Parameter[] subsubParam = new Parameter[2 * (i + 1)];
                 //how many data for each label when equally split
                 int split = ArrayUtils.Concat(mdata.ColumnNames, mdata.NumericColumnNames).Length / (i + 1);
                 for (int j = 0; j <= i; j++)
                 {
                     subsubParam[2 * j] = new StringParam(LabelString(j + 1, "Name"));
-                    int[] def = split != 0 ? Enumerable.Range(j*split, split).ToArray() : new int[0];
+                    int[] def = split != 0 ? Enumerable.Range(j * split, split).ToArray() : new int[0];
                     //fill
                     subsubParam[2 * j + 1] = GetData(mdata, LabelString(j + 1, "Data"), "", def);
                 }
@@ -196,7 +201,7 @@ namespace PluginEBprot
         {
             return new SingleChoiceParam(EXPDESIGN, 0)
             {
-                Values = new [] { "Independent", "Replicate", "Timecourse" },
+                Values = new[] { "Independent", "Replicate", "Timecourse" },
                 //fill
                 Help = ""
             };
@@ -211,6 +216,35 @@ namespace PluginEBprot
             };
         }
 
+        //fill
+        public static BoolParam GetMedRatio() => new BoolParam(MEDRATIO, true) { Help = "" };
+
+        public static BoolParam GetNumPep() => new BoolParam(NUMPEP, true) { Help = "" };
+
+        public static BoolParam GetPepRem() => new BoolParam(PEPREM, true) { Help = "" };
+
+        public static BoolParam GetPPScore() => new BoolParam(PPSCORE, true) { Help = "" };
+
+        public static BoolParam GetPostOdd() => new BoolParam(POSTODD, true) { Help = "" };
+
+        public static DoubleParam GetBFDR()
+        {
+            return new DoubleParam(BFDRCUT, 0.05) { Help = "Statistical significance cut-off." };
+        }
+
+        public static Parameter[] GetResults()
+        {
+            return new Parameter[]
+            {
+                GetMedRatio(),
+                GetNumPep(),
+                GetPepRem(),
+                GetPPScore(),
+                GetPostOdd(),
+                GetBFDR()
+            };
+        }
+
         public static BoolWithSubParams GetOutlierRM() => new BoolWithSubParams(OUTFILT, true)
         {
             Default = true,
@@ -218,7 +252,6 @@ namespace PluginEBprot
             SubParamsTrue = new Parameters(new Parameter[]
                 {
                     new IntParam(MINK, 5) {Help = "Minimum number of peptides per protein required in computing the global/reference standard-deviation in the outlier-filtering step"},
-                    new DoubleParam(BFDRCUT, 0.05) {Help = "Statistical significance cut-off." }
                 })
         };
 
@@ -296,7 +329,7 @@ namespace PluginEBprot
                 int split = ArrayUtils.Concat(mdata.ColumnNames, mdata.NumericColumnNames).Length / (i + 1);
                 for (int j = 0; j <= i; j++)
                 {
-                    subsubParam[2 * j] = new StringParam(GroupString(j + 1, "Label"));
+                    subsubParam[2 * j] = new StringParam(GroupString(j + 1, "Name"));
                     int[] def = split != 0 ? Enumerable.Range(j * split, split).ToArray() : new int[0];
                     //fill
                     subsubParam[2 * j + 1] = GetData(mdata, GroupString(j + 1, "Data"), "", def);

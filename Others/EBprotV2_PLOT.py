@@ -66,7 +66,8 @@ if __name__ == "__main__":
 
 	###PP plots
 	results = pd.read_csv("EBprot_results.txt", sep = '\t')
-	nums = (len(results.columns)-1)/6
+	###if %6 == 2 then it's rep case
+	nums = int((len(results.columns)-8)/6) if len(results.columns)%6 == 2 else int((len(results.columns)-1)/6)
 	subplotsize=0
 	fig, subplotsize = getFig2(nums)
 	with PdfPages("EBprotV2_PPscoreplot.pdf") as pdf:

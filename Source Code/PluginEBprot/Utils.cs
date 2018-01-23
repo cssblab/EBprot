@@ -140,6 +140,7 @@ namespace PluginEBprot
             int minPep = param.GetParam<int>(EBParameters.MINPEP).Value;
             double leftB = param.GetParam<double>(EBParameters.LEFTB).Value;
             double rightB = param.GetParam<double>(EBParameters.RIGHTB).Value;
+            double BFDR = param.GetParam<double>(EBParameters.BFDRCUT).Value;
 
             string[] lines =
             {
@@ -147,9 +148,9 @@ namespace PluginEBprot
                 string.Format("LOG2_TRANSFORM = {0}", needLog2Transformed),
                 string.Format("OUTLIER_RM = {0}", outlierRM),
                 //placeholders for outfilt true
-                //indices 3 and 4
+                //indices 3
                 "",
-                "",
+                string.Format("BFDR_THRESHOLD = {0}", BFDR),
                 string.Format("LABELS = {0}",labelString),
                 string.Format("MIN_PEP = {0}", minPep),
                 string.Format("LEFT_B = {0}", leftB),
@@ -158,9 +159,9 @@ namespace PluginEBprot
             if (outlierFilt.Value)
             {
                 int minK = outlierFilt.GetSubParameters().GetParam<int>(EBParameters.MINK).Value;
-                double BFDR = outlierFilt.GetSubParameters().GetParam<double>(EBParameters.BFDRCUT).Value;
+                //double BFDR = outlierFilt.GetSubParameters().GetParam<double>(EBParameters.BFDRCUT).Value;
                 lines[3] = string.Format("MIN_K = {0}", minK);
-                lines[4] = string.Format("BFDR_THRESHOLD = {0}", BFDR);
+                //lines[4] = string.Format("BFDR_THRESHOLD = {0}", BFDR);
             }
             return lines;
         }
@@ -252,7 +253,7 @@ namespace PluginEBprot
             {
                 int size = groups.GetSubParameters().GetParam<int[]>(EBParameters.GroupString(i + 1, "Data")).Value.Length;
                 groupSizes += (size.ToString() + " ");
-                string label = groups.GetSubParameters().GetParam<string>(EBParameters.GroupString(i + 1, "Label")).Value;
+                string label = groups.GetSubParameters().GetParam<string>(EBParameters.GroupString(i + 1, "Name")).Value;
                 groupLabels += (label + " ");
             }
             int minSamp = param.GetParam<int>(EBParameters.MINSAMP).Value;
@@ -338,22 +339,36 @@ namespace PluginEBprot
             return 0;
         }
 
-        public static void LoadOutput(IMatrixData mdata, string workingDir)
+        public static void LoadOutput(IMatrixData mdata, Parameters param, string workingDir)
         {
             string filename = Path.Combine(workingDir, OUTPUTFILE);
             char separator = '\t';
-            //string[] colNames = TabSep.GetColumnNames(filename, 0, PerseusUtils.commentPrefix,
-            //    PerseusUtils.commentPrefixExceptions, null, separator);
-            //List<string> listNames = new List<string>(colNames);
-            //List<string> strCols = ArrayUtils.SubList(listNames, new int[] { 0 });
-            //List<string> numCols = ArrayUtils.SubList(listNames, Enumerable.Range(1, listNames.Count - 1).ToArray());
-            //string[][] cols = TabSep.GetColumns(strCols.ToArray(), filename, 0, PerseusUtils.commentPrefix,
-            //    PerseusUtils.commentPrefixExceptions, separator);
-            //double[][] numericCols = TabSep.GetDoubleColumns(numCols.ToArray(), filename, 0, separator);
-            //int nrows = TabSep.GetRowCount(filename);
             string[] colNames = TabSep.GetColumnNames(filename, 0, PerseusUtils.commentPrefix,
                 PerseusUtils.commentPrefixExceptions, null, separator);
-            string[][] cols = TabSep.GetColumns(colNames, filename, 0, PerseusUtils.commentPrefix,
+            List<string> newColNames = new List<string>(colNames);
+
+            if (!param.GetParam<bool>(EBParameters.MEDRATIO).Value)
+            {
+                newColNames.RemoveAll(str => str.Contains("MedianlogRatio"));
+            }
+            if (!param.GetParam<bool>(EBParameters.NUMPEP).Value)
+            {
+                newColNames.RemoveAll(str => str.Contains("NumPep_"));
+            }
+            if (!param.GetParam<bool>(EBParameters.PEPREM).Value)
+            {
+                newColNames.RemoveAll(str => str.Contains("NumPepRm"));
+            }
+            if (!param.GetParam<bool>(EBParameters.PPSCORE).Value)
+            {
+                newColNames.RemoveAll(str => str.Contains("PPscore"));
+            }
+            if (!param.GetParam<bool>(EBParameters.POSTODD).Value)
+            {
+                newColNames.RemoveAll(str => str.Contains("PostOdds"));
+            }
+
+            string[][] cols = TabSep.GetColumns(newColNames.ToArray(), filename, 0, PerseusUtils.commentPrefix,
                 PerseusUtils.commentPrefixExceptions, separator);
             int nrows = TabSep.GetRowCount(filename);
 
@@ -361,15 +376,12 @@ namespace PluginEBprot
             mdata.Clear();
             mdata.Name = "EBprot Result";
             mdata.Values.Init(nrows, 0);
-            //mdata.SetAnnotationColumns(new List<string>(colNames), new List<string>(colNames), new List<string[]>(cols), new List<string>(),
-            //    new List<string>(), new List<string[][]>(), new List<string>(), new List<string>(), new List<double[]>(numericCols),
-            //    new List<string>(), new List<string>(), new List<double[][]>());
-            mdata.SetAnnotationColumns(new List<string>(colNames), new List<string>(colNames), new List<string[]>(cols), new List<string>(),
+            mdata.SetAnnotationColumns(new List<string>(newColNames), new List<string>(colNames), new List<string[]>(cols), new List<string>(),
                 new List<string>(), new List<string[][]>(), new List<string>(), new List<string>(), new List<double[]>(),
                 new List<string>(), new List<string>(), new List<double[][]>());
 
             //no numeric expression list at this point
-            int[] numericList = Enumerable.Range(1, colNames.Length - 1).ToArray();
+            int[] numericList = Enumerable.Range(1, newColNames.Count - 1).ToArray();
             StringToNumerical(numericList, mdata);
 
         }
