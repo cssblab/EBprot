@@ -1,16 +1,21 @@
 # Parameters For Sample Files
 
 ## Description
-	EBprotWithRatioConversion uses EBprotWithConv_Sample.txt as dataset
+	EBprotV2.GrpComparisons uses EBprotV2GrpComp_Sample.txt as dataset
 	EBprotV2 uses EBprotV2_Sample.txt as dataset
 
-## EBprotWithRatioConversion Parameters
+## EBprotV2.GrpComparisons Parameters
 	Working Directory: <preferred directory where results should be saved>
 	Experimental Design: Independent
 	Data Input Form: log_2
+	[x] Median Ratio of Proteins
+	[x] # of Peptides in Proteins
+	[x] # of Peptides Removed
+	[x] PP Score
+	[x] Posterior Odds
+	Bayesian False Discovery Rate Cutoff: 0.05
 	[x] Outlier Filtering:
 		Min K: 5
-		Bayesian False Discovery Rate Cutoff: 0.05
 	Lower Bound: 0.20
 	Upper Bound: 0.80
 	Min # of Peptides: 1
@@ -46,9 +51,14 @@ Note that choosing `Group 1 Contrast: Group 3/Group 1` and `Group 3 Contrast: No
 	Working Directory: <preferred directory where results should be saved>
 	Experimental Design: Independent
 	Data Input Form: log_2
+	[x] Median Ratio of Proteins
+	[x] # of Peptides in Proteins
+	[x] # of Peptides Removed
+	[x] PP Score
+	[x] Posterior Odds
+	Bayesian False Discovery Rate Cutoff: 0.05
 	[x] Outlier Filtering:
 		Min K: 5
-		Bayesian False Discovery Rate Cutoff: 0.05
 	Lower Bound: 0.20
 	Upper Bound: 0.80
 	Min # of Peptides: 1
