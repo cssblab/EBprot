@@ -1,0 +1,16 @@
+### input file ###
+
+### Sample information ###
+GROUP_SIZE = 14 15 11
+GROUP_LABELS = ERPR HER2 TN
+MIN_SAMPLE = 4 
+IS_LOG = true
+
+
+### constrast matrix ### 
+CONTRAST_MATRIX =
+- 0 0 
+0 - 0 
+1 1 - 
+ 
+ 

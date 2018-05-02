@@ -14,30 +14,9 @@ The principal method (version 1) was published [here](http://onlinelibrary.wiley
 
 See the [Wiki](../../wiki) for full documentation.
 
-See [Samples](Samples) for sample files and parameters.
-
 A step by step tutorial is available [here](../../wiki/Getting-Started).
-
-## Requirements
-
-64 bit Windows with .NET Framework 4.5 or higher (See [Perseus Requirements](http://www.coxdocs.org/doku.php?id=perseus:common:download_and_installation))
-
-PERSEUS version 1.6.0.2 (See [Perseus Download and Installation Guide](http://www.coxdocs.org/doku.php?id=perseus:common:download_and_installation#download))
-
-## Installing
-
-Upon publication of the EBProt2 paper, the plugin will be available via the Perseus website.
-
-Currently, the plugin is only distributed through github.
-
-To install through github:
-
-* [Download Perseus-PluginEBprot ZIP](../../releases/download/v0.1.0/pluginEBprot.zip)
-* Unzip `pluginEBprot.zip`
-* Locate the directory of `Perseus.exe`, which contains `bin` folder
-* Copy/Cut `PluginEBprot.dll` file and `EBprotInstallations` folder from `pluginEBprot`
-* Paste into the `bin` folder
 
 ## Bugs and Feedback
 
 For bugs, questions and discussions please use the [GitHub Issues](../../issues).
+

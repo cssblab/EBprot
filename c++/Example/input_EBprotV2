@@ -1,0 +1,28 @@
+### input file ###
+
+### Experimental design ###
+EXPERIMENTAL_DESIGN = independent
+#EXPERIMENTAL_DESIGN = replicate
+#EXPERIMENTAL_DESIGN = timecourse
+
+
+### log-transformation ###
+LOG2_TRANSFORM = false
+
+
+### Filtering options ###
+OUTLIER_RM = true
+MIN_K = 5
+BFDR_THRESHOLD = 0.05
+
+
+### Sample information ###
+LABELS = TNvsERPR TNvsHER2
+MIN_PEP = 1 
+
+
+### range of Null distribution ### 
+LEFT_B = 0.20
+RIGHT_B = 0.80
+ 
+ 
