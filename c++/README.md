@@ -21,6 +21,8 @@ GCC Compiler
 
 GNU Scientific Library (GSL) which can be downloaded [here](https://www.gnu.org/software/gsl/)
 
+[R programming language](https://www.r-project.org) to visualize the outputs of the program
+
 ## Installing
 
 * [Download EBprotV2 ZIP](../../../releases/download/v1.0.0/EBprotV2.zip)
