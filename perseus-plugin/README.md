@@ -2,7 +2,7 @@
 
 **PluginEBprot** is an implementation of EBprot developed for the [Perseus platform](http://www.coxdocs.org/doku.php?id=perseus:start), providing a GUI for Windows users. 
 
-1.There are two modules available: 
+There are two modules available: 
 1. `EBprotV2` runs the differential expression analysis on the given data
 2. `EBprotV2.GrpComparisons` contains an extra sub-module that creates ratio data for groups comparisons from multiple experiments and then runs the differential expression analysis like `EBprotV2`
 
