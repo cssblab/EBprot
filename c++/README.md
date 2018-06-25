@@ -1,6 +1,6 @@
-# EBprot C++
+# EBprot CLI
 
-**EBprot C++** is a C++ implementation of EBprot offering flexible semi-parametric modeling on top of the [version 1](http://onlinelibrary.wiley.com/doi/10.1002/pmic.201400620/abstract;jsessionid=613BD152847535F4278E0C6ED6ACD036.f02t01) (Koh et al, *Proteomics* 2015) implemented in R.
+**EBprot CLI** is a C++ implementation of EBprot offering flexible semi-parametric modeling on top of the [version 1](http://onlinelibrary.wiley.com/doi/10.1002/pmic.201400620/abstract;jsessionid=613BD152847535F4278E0C6ED6ACD036.f02t01) (Koh et al, *Proteomics* 2015) implemented in R.
 
 There are two modules available: 
 1. `EBprotV2` is the main module that performs a mixture modeling on the log ratio data and estimates the posterior probability of differential expression for a protein and the corresponding FDR.
