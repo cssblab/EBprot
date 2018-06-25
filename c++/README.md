@@ -1,5 +1,3 @@
-C++ implementation of EBprot
-
 # EBprot C++
 
 **EBprot C++** is a C++ implementation of EBprot offering flexible semi-parametric modeling on top of the [version 1](http://onlinelibrary.wiley.com/doi/10.1002/pmic.201400620/abstract;jsessionid=613BD152847535F4278E0C6ED6ACD036.f02t01) (Koh et al, *Proteomics* 2015) implemented in R.
@@ -7,7 +5,7 @@ C++ implementation of EBprot
 There are two modules available: 
 1. `EBprotV2` is the main module that performs a mixture modeling on the log ratio data and estimates the posterior probability of differential expression for a protein and the corresponding FDR.
 
-2. `EBprot.MakeGrpData' is a sub-module which helps to create ratio data for group comparisons from multiple experiments. This generates a weighted averate ratio for differential expression analysis using EBprotV2. This module should be used before EBprotV2 in datasets where there are multiple samples across different groups. 
+2. `EBprot.MakeGrpData` is a sub-module which helps to create ratio data for group comparisons from multiple experiments. This generates a weighted averate ratio for differential expression analysis using EBprotV2. This module should be used before EBprotV2 in datasets where there are multiple samples across different groups. 
 
 ## Full Documentation
 
