@@ -25,7 +25,7 @@ GNU Scientific Library (GSL) which can be downloaded [here](https://www.gnu.org/
 
 ## Installing
 
-* [Download EBprotV2 ZIP](../../../releases/download/v1.0.0/EBprotV2.zip)
+* [Download EBprotV2 ZIP](../../../releases/download/v1.1.0/EBprotV2.zip)
 * Type `make` to install all the components of the software
 
 ## Bugs and Feedback
