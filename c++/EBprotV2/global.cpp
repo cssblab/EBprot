@@ -328,6 +328,7 @@ vector<int> OutlierRm(int mink, map<string, vector<string> >&PROTmap, map<string
 	   SDvec.push_back(tmp_sd);
 	}	
     }
+    cerr<<"SDvec size: "<<SDvec.size();
     ref_sd = CalMeanMed(SDvec,2);
     cerr<<"\nIn the Outlier Filtering step, "<<SDvec.size()<<" proteins with at least "<<mink<<" peptides were used to calculate a reference SD."<<endl;
     cerr<<"The median of the standard deviations of the peptide distribution is "<< ref_sd <<endl;
@@ -571,7 +572,13 @@ vector<double> nonparamFit(vector<string> protNA,vector<int> pepRm,map<string, v
      cerr<<"This occurs at ratio: ("<<quantile_r.at(0)<<", "<<quantile_r.at(1)<<")\n"<<endl;
 
      vector<double> Null_r = getNull(allRatio, quantile_r.at(1), quantile_r.at(0));
+     //Null_r = UniqueVec(Null_r);
      sort(Null_r.begin(), Null_r.end());
+
+     //bool allsame = true;
+     //double first = Null_r.at(0);
+     //for(int h=1; h<Null_r.size();h++) if(Null_r.at(h)!=first) allsame=false;
+     //if(allsame) cerr<<"Null_r vector all same!"<<endl;
 
      double MODE = getModeDensity(density,allRatio);
      cerr<<"The estimates for the Null components: "<<endl;
@@ -580,11 +587,14 @@ vector<double> nonparamFit(vector<string> protNA,vector<int> pepRm,map<string, v
      double a = getMin(Null_r) - 1e-6;
      double b = getMax(Null_r) + 1e-6;
 
+     cerr<<"a: " <<a<<"\tb:"<<b<<endl;
+
      double sdNull = sdTruncatedNormal(Null_r,MODE,a , b);
      cerr<<"sdNull is: "<<sdNull<<endl;
 
      vector<double> denNullnorm = NORMpdf2(Null_r,MODE, sdNull);
-     //for(int k=0; k<5;k++) cerr<<"fvec_G: " <<denNullnorm.at(k)<<endl;
+     //for(int k=0; k<denNullnorm.size();k++) cerr<<"fvec_G: " <<denNullnorm.at(k)<<"\t";
+     //cerr<<endl;
      vector<double> denNullNP;
      bool found;
      for(int i=0; i<Null_r.size(); i++){
@@ -601,12 +611,14 @@ vector<double> nonparamFit(vector<string> protNA,vector<int> pepRm,map<string, v
      }
      // for(int k=0; k<5; k++) cerr<<"fvec_NP: "<<denNullNP.at(k)<<endl;
      double pi_null;
+     
      for(int k=0; k<denNullnorm.size(); k++){
 	if(Null_r.at(k)==MODE) {
 	pi_null = denNullNP.at(k)/denNullnorm.at(k);
 	cerr<<"Density Null at Mode: "<<denNullNP.at(k)<<endl;
      	cerr<<"Density of guassian Null at Mode: "<< denNullnorm.at(k)<<endl;
-        }
+        break;
+	}
      }
 
      cerr<<"pi_null: "<<pi_null<<endl;
@@ -633,6 +645,7 @@ vector<double> nonparamFit(vector<string> protNA,vector<int> pepRm,map<string, v
  	      denDown.push_back(1e-100);
    	}
      }
+
 
      //Calculating area under curve to estimate pi_up and pi_down
      double Area_up = TrapeziumRule(allRatio,denUp);
@@ -682,8 +695,9 @@ vector<double> nonparamFit(vector<string> protNA,vector<int> pepRm,map<string, v
      string label = UserInput.labels.at(pos-1);
      if(UserInput.ExpDesign=="timecourse") label = "timecourse";
      outputDensity(label,allRatio,densityMap);
+     //cerr<<"finish output Density file"<<endl;
      computePPscore(PI_prot,PROTmap,PEPmap,densityMap, PROTEIN);
-
+     //cerr<<"finish computePPscore"<<endl;
      return PI_prot;
 }
 
@@ -710,17 +724,23 @@ void computePPscore(vector<double> pi, map<string, vector<string> >&PROTmap, map
      vector<double> allr;
      vector<double> upDen;
      vector<double> downDen;
+     //cerr<<"DENmap size: "<<DENmap.size()<<endl;
      for(d_iter= DENmap.begin(); d_iter!=DENmap.end(); d_iter++){
 	allr.push_back(d_iter->first);
 	fullden.push_back(d_iter->second.at(0));
 	upDen.push_back(d_iter->second.at(2));
 	downDen.push_back(d_iter->second.at(3));
+        //cerr<<d_iter->second.at(3)<<endl;
      }
      MODE = getModeDensity(fullden,allr);
+     //cerr<<"size of upDen: "<<upDen.size()<<endl;
      double UpDiesAt = DiesAt(upDen,allr,1);
+     //cerr<<"size of downDen: "<<downDen.size()<<endl;
      double DownDiesAt = DiesAt(downDen, allr,2);
-     //cerr<<"Positive density dies at " <<UpDiesAt<<" and negative dies at "<<DownDiesAt<<"\n"<<endl;
+     //cerr<<"or here????"<<endl;
+     cerr<<"Positive density dies at " <<UpDiesAt<<" and negative dies at "<<DownDiesAt<<"\n"<<endl;
     
+     
      for(prot_iter=PROTmap.begin(); prot_iter!=PROTmap.end(); prot_iter++){
 	 curr_prot = prot_iter->first;
          peptides = prot_iter->second;
@@ -844,8 +864,18 @@ void computePPscore(vector<double> pi, map<string, vector<string> >&PROTmap, map
 
 	 double Zup = ((NumP*ZupP)+(NumN*ZupN))/(NumP+NumN);
 	 double Zdown = ((NumP*ZdownP)+(NumN*ZdownN))/(NumP+NumN);
+         if (Zup!=Zup) Zup = 0;
+	 if(Zdown!=Zdown) Zdown =0;
 
          ppscore = Zup-Zdown;
+ 	 //if(ppscore!=ppscore){
+	//	cerr<<"protein: "<<curr_prot<<endl;
+	//	cerr<<"Zup: "<<Zup<<"\tZdown: "<<Zdown<<endl;
+	//	cerr<<"Number postive, negative: "<< NumP<<"\t"<<NumN<<endl;
+	//	cerr<<"Positive Zup Zdown: "<<ZupP<<"\t"<<ZdownP<<endl;
+	//	cerr<<"Negative Zup Zdown: "<<ZupN<<"\t"<<ZdownN<<endl;
+        // }
+
 	 P_iter->second.PPscore.push_back(ppscore);
 
 	 double Up_LLp = (Up_LLP-null_LLP);
@@ -858,14 +888,14 @@ void computePPscore(vector<double> pi, map<string, vector<string> >&PROTmap, map
          postodd = max(Up_LLp,Down_LLn);
 	 P_iter->second.PostOdds.push_back(postodd);
 
-          //if(curr_prot=="P55268"|curr_prot=="Q9Y623"){
-	     //cerr<<"MODE: "<<MODE<<"\tNumPos: "<<NumP<<"\tNumNeg: "<<NumN<<endl;
+         // if(counter<10){
+	   //  cerr<<"MODE: "<<MODE<<"\tNumPos: "<<NumP<<"\tNumNeg: "<<NumN<<endl;
 	     //cerr<<"ZupP: "<<ZupP<<"\tZdownP: "<<ZdownP<<"\tZupN: "<<ZupN<<"\tZdownN: "<<ZdownN<<endl;
 	     //cerr<<"Zup: "<<Zup<<"\tZdown: "<<Zdown<<endl;
 	     //cerr<<"Up_LL: "<<Up_LL<<"\tDown_LL: "<<Down_LL<<"\tNull_LL: "<< null_LL<<endl;
 	     //cerr<<"PPscore: "<<ppscore<<"\tPostOdds: "<<postodd<<endl;
-	     //counter++;
 	//}
+        counter++;
      }	  
 
 }
@@ -972,15 +1002,20 @@ double DiesAt(vector<double> den, vector<double> r, int type){
    double ret;
    vector<double> rr;
    double peak = getModeDensity(den,r);
+   //cerr<<"peak"<< peak<<endl;
    double min = getMin(den);
+   //cerr<<"min: "<<min<<endl;
    for(int j=0; j<den.size(); j++) {
 	//for positive -1 for negative -2
-	if(type==1){if(den.at(j)==min & den.at(j)<peak) rr.push_back(r.at(j));}
-	if(type==2){if(den.at(j)==min & den.at(j)>peak) rr.push_back(r.at(j));}
+	if(type==1){if(den.at(j)==min & den.at(j)<=peak) rr.push_back(r.at(j));}
+	if(type==2){if(den.at(j)==min & den.at(j)>=peak) rr.push_back(r.at(j));}
    }
-    
-   if(type==1) ret = getMax(rr);
-   if(type==2) ret = getMin(rr);	 
+    //cerr<<rr.size()<<endl;
+    if(rr.size()==0) ret =peak;
+    else{
+       if(type==1) ret = getMax(rr);
+       if(type==2) ret = getMin(rr);
+    }	 
         
    return ret;
 }   
