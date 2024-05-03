@@ -1,6 +1,6 @@
 /* 
  * File:   global.cpp
- * Author: Hiromi Jenna Koh
+ * Author: Hiromi Koh, Huiyi Tay
  * 
  * Created on May 9, 2015, 2:22 PM
  */
@@ -1340,57 +1340,57 @@ void outputResult(Input_t *UserInput , map<string, Protein_t>&PROTEIN){
      vector<double> bfdr;
 
      for (iter=PROTEIN.begin(); iter!=PROTEIN.end(); iter++){
-	curr_prot = iter->first;
-        ratio = iter->second.medratio;
-	score = iter->second.PPscore;
-	bfdr = iter->second.bfdr;
-        outF <<curr_prot;
+         curr_prot = iter->first;
+         ratio = iter->second.medratio;
+         score = iter->second.PPscore;
+         bfdr = iter->second.bfdr;
+         outF <<curr_prot;
 
-	double tmp;
-	int tmp2;
+         double tmp;
+         int tmp2;
 
-        for(int k=0; k<samplelab.size();k++){
-        tmp = ratio.at(k);
-        if(tmp == NA_VAL) outF<<"\t"<<"";
-	else outF<<"\t"<<tmp;
-	tmp2 = iter->second.numPep.at(k);
-	if(tmp2 == NA_VAL) outF<<"\t"<<"";
-	else outF<<"\t"<<tmp2;
- 	tmp2 = iter->second.numPepRM.at(k);
-	if(tmp2 ==NA_VAL) outF<<"\t"<<"";
-	else outF<<"\t"<<tmp2;
-	tmp = score.at(k);
-	if(tmp==NA_VAL) outF<<"\t"<<"";
-	else outF<<"\t"<<tmp;
-	tmp = iter->second.PostOdds.at(k);
-	if(tmp==NA_VAL) outF<<"\t"<<"";
-	else outF<<"\t"<<tmp;
-	tmp = bfdr.at(k);
-	if(tmp==NA_VAL) outF<<"\t"<<"";
-	else outF<<"\t"<<tmp;
-	}
+         for(int k=0; k<samplelab.size();k++){
+             tmp = ratio.at(k);
+             if(tmp == NA_VAL) outF<<"\t"<<"";
+             else outF<<"\t"<<tmp;
+             tmp2 = iter->second.numPep.at(k);
+             if(tmp2 == NA_VAL) outF<<"\t"<<"";
+             else outF<<"\t"<<tmp2;
+             tmp2 = iter->second.numPepRM.at(k);
+             if(tmp2 ==NA_VAL) outF<<"\t"<<"";
+             else outF<<"\t"<<tmp2;
+             tmp = score.at(k);
+             if(tmp==NA_VAL) outF<<"\t"<<"";
+             else outF<<"\t"<<tmp;
+             tmp = iter->second.PostOdds.at(k);
+             if(tmp==NA_VAL) outF<<"\t"<<"";
+             else outF<<"\t"<<tmp;
+             tmp = bfdr.at(k);
+             if(tmp==NA_VAL) outF<<"\t"<<"";
+             else outF<<"\t"<<tmp;
+         }
 
-        if(design=="replicate"){
-	    rmMissing(ratio);
-	    rmMissing(score);
-	    rmMissing(bfdr);
-	    outF<<"\t"<<ratio.size();
-	    int numsig=0;
-	    for(int k=0; k<score.size(); k++) if(bfdr.at(k)< thres) numsig++;	    
-	    outF<<"\t"<<numsig;
-	    outF<<"\t"<<CalMeanMed(score,1)<<"\t"<<getMin(score)<<"\t"<<getMax(score);
-            int numpos=0;
-	    int numneg=0;
-	    for(int k=0; k<ratio.size(); k++){
-		if(ratio.at(k)>=0)numpos++;
-	        else numneg++;
-	    }
-	    outF<<"\t"<<numpos<<"\t"<<numneg;
-        }
-	outF<<endl;	
-        ratio.clear();
-	score.clear();
-	bfdr.clear();
+         if(design=="replicate"){
+             rmMissing(ratio);
+             rmMissing(score);
+             rmMissing(bfdr);
+             outF<<"\t"<<ratio.size();
+             int numsig=0;
+             for(int k=0; k<score.size(); k++) if(bfdr.at(k)< thres) numsig++;	    
+             outF<<"\t"<<numsig;
+             outF<<"\t"<<CalMeanMed(score,1)<<"\t"<<getMin(score)<<"\t"<<getMax(score);
+             int numpos=0;
+             int numneg=0;
+             for(int k=0; k<ratio.size(); k++){
+                 if(ratio.at(k)>=0)numpos++;
+                 else numneg++;
+             }
+             outF<<"\t"<<numpos<<"\t"<<numneg;
+         }
+         outF<<endl;	
+         ratio.clear();
+         score.clear();
+         bfdr.clear();
       }
       outF.close();
 } 
