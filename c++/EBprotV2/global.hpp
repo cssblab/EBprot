@@ -1,6 +1,6 @@
 /* 
  * File:   global.hpp
- * Author: Hiromi Jena Koh
+ * Author: Hiromi Koh, Huiyi Tay
  *
  * Created on May 9, 2016, 2:22 PM
  */
