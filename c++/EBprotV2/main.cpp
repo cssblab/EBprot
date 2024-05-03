@@ -7,7 +7,7 @@
 
 /* 
  * File:   main.cpp
- * Author: Hiromi Jenna Koh
+ * Author: Hiromi Koh, Huiyi Tay
  *
  * Created on 9 May, 2016, 11:03 AM
  */
